@@ -1,0 +1,19 @@
+---
+- name: Upload gitlab configuration
+  template:
+    src=templates/gitlab.yml
+    dest=/home/git/gitlab/config
+    owner=git
+    group=git
+    mode=0644
+
+- name: Initialize database
+  shell: echo yes | bundle exec rake gitlab:setup RAILS_ENV=production
+    chdir=/home/git/gitlab
+  sudo_user: git
+
+- name: Compile assets
+  command: bundle exec rake assets:precompile RAILS_ENV=production
+    chdir=/home/git/gitlab
+  sudo_user: git
+  notify: restart gitlab

@@ -1,0 +1,9 @@
+---
+- hosts: all
+  sudo: true
+
+  roles:
+    - gitlab
+
+  tasks:
+    - include: configure.yml
