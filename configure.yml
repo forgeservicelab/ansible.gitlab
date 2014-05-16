@@ -1,11 +1,11 @@
 ---
 - name: Upload gitlab configuration
   template:
-    src=templates/gitlab.yml
-    dest=/home/git/gitlab/config
-    owner=git
-    group=git
-    mode=0644
+    src: templates/gitlab.yml
+    dest: /home/git/gitlab/config
+    owner: git
+    group: git
+    mode: 0644
 
 - name: Initialize database
   shell: echo yes | bundle exec rake gitlab:setup RAILS_ENV=production
