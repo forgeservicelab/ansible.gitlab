@@ -24,4 +24,4 @@ This playbook requires a number of variables that are confidential and as such n
 - `ldap_search_base` - The LDAP base where we can search for users
 - `ldap_user_filter` - The filter (as per RFC 4515) to apply to LDAP users (this blacklists matches).
 - `ldap_group_filter` - The **List** of allowed LDAP groups (this whitelists matches).
-- `cas_url` - The URL of the CAS server.
+- `cas_url` - The URL of the CAS server. This variable needs to be double quoted as it needs the quotation once the template is compiled. E.g.: `"'http://url.to.cas/'"`
