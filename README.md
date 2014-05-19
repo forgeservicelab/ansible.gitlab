@@ -25,3 +25,4 @@ This playbook requires a number of variables that are confidential and as such n
 - `ldap_user_filter` - The filter (as per RFC 4515) to apply to LDAP users (this blacklists matches).
 - `ldap_group_filter` - The **List** of allowed LDAP groups (this whitelists matches).
 - `cas_url` - The URL of the CAS server.
+- `service_email` - The admin email address
