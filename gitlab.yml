@@ -1,11 +1,17 @@
 ---
 - hosts: all
   sudo: true
+  vars_files:
+    - group_vars/secrets.yml
 
   roles:
     - gitlab
-
+    - { role: forge_ssl,
+        key_location: "{{ local_ssl_key_path }}",
+        target_key_location: private/,
+        target_cert_location: certs/
+      }
   tasks:
     - include: configure.yml
-  vars_files:
-    - group_vars/secrets.yml
+      vars:
+        db_reinit: true

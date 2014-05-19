@@ -7,10 +7,27 @@
     group: git
     mode: 0644
 
+- name: Upload nginx configuration
+  template:
+    src: templates/gitlab.tpl
+    dest: /etc/nginx/sites-available/gitlab
+  notify: restart nginx
+
+- name: Replace admin fixture with proper email
+  lineinfile:
+    dest: /home/git/gitlab/db/fixtures/production/001_admin.rb
+    regexp: ^({{ item }})admin@local.host(.*)
+    line: \1{{ service_email }}\2
+    backrefs: yes
+  with_items:
+    - .*email.*
+    - login.*
+
 - name: Initialize database
   shell: echo yes | bundle exec rake gitlab:setup RAILS_ENV=production
     chdir=/home/git/gitlab
   sudo_user: git
+  when: db_reinit
 
 - name: Compile assets
   command: bundle exec rake assets:precompile RAILS_ENV=production

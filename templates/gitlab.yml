@@ -16,8 +16,8 @@ production: &base
   gitlab:
     ## Web server settings (note: host is the FQDN, do not include http://)
     host: {{ web_domain }}
-    port: 80
-    https: false
+    port: 443
+    https: true
 
     # Uncomment and customize the last line to run in a non-root path
     # WARNING: We recommend creating a FQDN to host GitLab in a root path instead of this.
