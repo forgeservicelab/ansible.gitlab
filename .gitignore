@@ -1,2 +1,3 @@
 group_vars/secrets.yml
 inventory
+ansible.cfg

@@ -7,6 +7,12 @@ Prerequisites
 -------------
 
 - The target machine(s) have to be already instantiated, this playbook does not launch computing instances
+- If the source repositories use the ssh transport (default yes) with a password protected key, the following lines must appear in your ansible configuration files:
+
+```
+[ssh_connection]
+ssh_args = -o ForwardAgent=yes
+```
 
 ### The inventory file
 This playbook targets all machines so it is **highly advised** to create a custom inventory file for this playbook and run as:
