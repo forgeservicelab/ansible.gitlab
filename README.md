@@ -1,7 +1,7 @@
 Gitlab
 ======
 
-Ansible playbook to get gitlab installed from source on a Debian system
+Ansible playbook to get gitlab installed from source on a Debian system on Forge.
 
 Prerequisites
 -------------
