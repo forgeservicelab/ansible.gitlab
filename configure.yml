@@ -29,6 +29,12 @@
   sudo_user: git
   when: db_reinit
 
+- name: Run database migration
+  command: bundle exec rake db:migrate
+    chdir=/home/git/gitlab
+  sudo_user: git
+  notify: restart gitlab
+
 - name: Compile assets
   command: bundle exec rake assets:precompile RAILS_ENV=production
     chdir=/home/git/gitlab
