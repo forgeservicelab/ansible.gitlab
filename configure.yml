@@ -30,7 +30,7 @@
   when: db_reinit
 
 - name: Run database migration
-  command: bundle exec rake db:migrate
+  command: bundle exec rake db:migrate RAILS_ENV=production
     chdir=/home/git/gitlab
   sudo_user: git
   notify: restart gitlab
