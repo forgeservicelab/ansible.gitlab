@@ -14,4 +14,4 @@
   tasks:
     - include: configure.yml
       vars:
-        db_reinit: true
+        db_reinit: false
