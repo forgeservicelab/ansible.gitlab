@@ -15,3 +15,8 @@
     - include: configure.yml
       vars:
         db_reinit: false
+  handlers:
+    - name: restart gitlab
+      service:
+        name: gitlab
+        state: restarted

@@ -2,9 +2,9 @@
 - name: Upload gitlab configuration
   template:
     src: templates/gitlab.yml
-    dest: /home/git/gitlab/config
-    owner: git
-    group: git
+    dest: "{{ git_user_home}}/gitlab/config"
+    owner: "{{ git_user_name }}"
+    group: "{{ git_user_name }}"
     mode: 0644
 
 - name: Upload nginx configuration
@@ -15,7 +15,7 @@
 
 - name: Replace admin fixture with proper email
   lineinfile:
-    dest: /home/git/gitlab/db/fixtures/production/001_admin.rb
+    dest: "{{ git_user_home }}/gitlab/db/fixtures/production/001_admin.rb"
     regexp: ^({{ item }})admin@local.host(.*)
     line: \1{{ service_email }}\2
     backrefs: yes
@@ -25,18 +25,22 @@
 
 - name: Initialize database
   shell: echo yes | bundle exec rake gitlab:setup RAILS_ENV=production
-    chdir=/home/git/gitlab
+    chdir={{ git_user_home }}/gitlab
   sudo_user: git
   when: db_reinit
 
 - name: Run database migration
   command: bundle exec rake db:migrate RAILS_ENV=production
-    chdir=/home/git/gitlab
+    chdir={{ git_user_home }}/gitlab
   sudo_user: git
   notify: restart gitlab
+  tags:
+    - redeploy
 
 - name: Compile assets
   command: bundle exec rake assets:precompile RAILS_ENV=production
-    chdir=/home/git/gitlab
+    chdir={{ git_user_home }}/gitlab
   sudo_user: git
   notify: restart gitlab
+  tags:
+    - redeploy
