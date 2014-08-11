@@ -32,7 +32,7 @@
 - name: Run database migration
   command: bundle exec rake db:migrate RAILS_ENV=production
     chdir={{ git_user_home }}/gitlab
-  sudo_user: git
+  sudo_user: "{{ git_user_name }}"
   notify: restart gitlab
   tags:
     - redeploy
@@ -40,7 +40,7 @@
 - name: Compile assets
   command: bundle exec rake assets:precompile RAILS_ENV=production
     chdir={{ git_user_home }}/gitlab
-  sudo_user: git
+  sudo_user: "{{ git_user_name }}"
   notify: restart gitlab
   tags:
     - redeploy

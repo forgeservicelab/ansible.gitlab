@@ -16,7 +16,7 @@
 # [2] https://github.com/agentzh/chunkin-nginx-module
 
 upstream gitlab {
-  server unix:/home/git/gitlab/tmp/sockets/gitlab.socket;
+  server unix:{{ git_user_home }}/gitlab/tmp/sockets/gitlab.socket;
 }
 
 server {
@@ -32,7 +32,7 @@ server {
   ssl_certificate {{ ssl_cert_location }};
   ssl_certificate_key {{ ssl_key_location }};
 
-  root /home/git/gitlab/public;
+  root {{ git_user_home }}/gitlab/public;
   
   # Increase this if you want to upload large attachments
   # Or if you want to accept large git objects over http
@@ -69,7 +69,7 @@ server {
 
   # Enable gzip compression as per rails guide: http://guides.rubyonrails.org/asset_pipeline.html#gzip-compression
   location ~ ^/(assets)/  {
-    root /home/git/gitlab/public;
+    root {{ git_user_home }}/gitlab/public;
     gzip_static on; # to serve pre-gzipped version
     expires max;
     add_header Cache-Control public;
