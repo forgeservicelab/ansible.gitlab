@@ -15,6 +15,12 @@
     - include: configure.yml
       vars:
         db_reinit: false
+  post_tasks:
+    - name: clear gitlab from /tmp directory
+      file:
+        path: /tmp/gitlab
+        recurse: yes
+        state: absent
   handlers:
     - name: restart gitlab
       service:
