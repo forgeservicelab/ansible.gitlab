@@ -26,7 +26,7 @@
 - name: Initialize database
   shell: echo yes | bundle exec rake gitlab:setup RAILS_ENV=production
     chdir={{ git_user_home }}/gitlab
-  sudo_user: git
+  sudo_user: "{{ git_user_name }}"
   when: db_reinit
 
 - name: Run database migration
