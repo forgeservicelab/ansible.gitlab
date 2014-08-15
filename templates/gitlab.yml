@@ -244,8 +244,8 @@ production: &base
     google_analytics_id: {{ google_analytics_id_gitlab }}
 
     ## Piwik analytics.
-    # piwik_url: '_your_piwik_url'
-    # piwik_site_id: '_your_piwik_site_id'
+    piwik_url: {{ piwik_url_gitlab }}
+    piwik_site_id: {{ piwik_site_id_gitlab }}
 
     ## Text under sign-in page (Markdown enabled)
     # sign_in_text: |
