@@ -23,6 +23,17 @@
     - .*email.*
     - login.*
 
+- name: Use alternative authorized_keys file for gitlab shell
+  replace:
+    dest: "{{ git_user_home }}/gitlab-shell/config.yml"
+    regexp: ssh/authorized_keys
+    replace: ssh/gitlab_authorized_keys
+
+- name: Regenerate authorized_keys
+  shell: echo yes | bundle exec rake gitlab:shell:setup RAILS_ENV=production
+    chdir={{ git_user_home }}/gitlab
+  sudo_user: "{{ git_user_name }}"
+
 - name: Initialize database
   shell: echo yes | bundle exec rake gitlab:setup RAILS_ENV=production
     chdir={{ git_user_home }}/gitlab
