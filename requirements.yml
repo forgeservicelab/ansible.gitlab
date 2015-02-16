@@ -1,0 +1,12 @@
+# Roles
+- src: git+ssh://gitlab@git.forgeservicelab.fi:10022/ansible-roles/common.git
+  path: roles/
+  name: common
+
+- src: git+ssh://gitlab@git.forgeservicelab.fi:10022/ansible-roles/forge_ssl.git
+  path: roles/
+  name: forge_ssl
+
+- src: git+ssh://gitlab@git.forgeservicelab.fi:10022/ansible-roles/gitlab.git
+  path: roles/
+  name: gitlab

@@ -1,27 +1,9 @@
 ---
-- name: Upload gitlab configuration
-  template:
-    src: templates/gitlab.yml
-    dest: "{{ git_user_home}}/gitlab/config"
-    owner: "{{ git_user_name }}"
-    group: "{{ git_user_name }}"
-    mode: 0644
-
 - name: Upload nginx configuration
   template:
     src: templates/gitlab.tpl
     dest: /etc/nginx/sites-available/gitlab
   notify: restart nginx
-
-- name: Replace admin fixture with proper email
-  lineinfile:
-    dest: "{{ git_user_home }}/gitlab/db/fixtures/production/001_admin.rb"
-    regexp: ^({{ item }})admin@local.host(.*)
-    line: \1{{ service_email }}\2
-    backrefs: yes
-  with_items:
-    - .*email.*
-    - login.*
 
 - name: Use alternative authorized_keys file for gitlab shell
   replace:
@@ -35,7 +17,7 @@
   sudo_user: "{{ git_user_name }}"
 
 - name: Initialize database
-  shell: echo yes | bundle exec rake gitlab:setup RAILS_ENV=production
+  shell: echo yes | bundle exec rake gitlab:setup RAILS_ENV=production GITLAB_ROOT_PASSWORD={{ gitlab_admin_pass }}
     chdir={{ git_user_home }}/gitlab
   sudo_user: "{{ git_user_name }}"
   when: db_reinit
