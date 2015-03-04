@@ -32,8 +32,17 @@ server {
   ssl_certificate {{ ssl_cert_location }};
   ssl_certificate_key {{ ssl_key_location }};
 
+  # SSL strengthening
+  ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+  ssl_ciphers !DH:EECDH+ECDSA+AESGCM:EECDH+aRSA+AESGCM:EECDH+ECDSA+SHA384:EECDH+ECDSA+SHA256:EECDH+aRSA+SHA384:EECDH+aRSA+SHA256:EECDH+aRSA+RC4:EECDH:EDH+aRSA:!aNULL:!eNULL:!LOW:!3DES:!MD5:!EXP:!PSK:!SRP:!DSS:!RC4;
+  ssl_prefer_server_ciphers on;
+
+  keepalive_timeout 70;
+  ssl_session_cache shared:SSL:10m;
+  ssl_session_timeout 10m;
+
   root {{ git_user_home }}/gitlab/public;
-  
+
   # Increase this if you want to upload large attachments
   # Or if you want to accept large git objects over http
   client_max_body_size 20m;
@@ -51,7 +60,7 @@ server {
   # if a file, which is not found in the root folder is requested,
   # then the proxy pass the request to the upsteam (gitlab unicorn)
   location @gitlab {
-    # If you use https make sure you disable gzip compression 
+    # If you use https make sure you disable gzip compression
     # to be safe against BREACH attack
     # gzip off;
 
