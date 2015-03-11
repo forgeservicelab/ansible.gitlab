@@ -27,6 +27,7 @@ server {
   listen *:443 ssl;
   server_name {{ web_domain }};     # e.g., server_name source.example.com;
   server_tokens off;     # don't show the version number, a security best practice
+  add_header Strict-Transport-Security "max-age=31536000";
 
   ssl on;
   ssl_certificate {{ ssl_cert_location }};
