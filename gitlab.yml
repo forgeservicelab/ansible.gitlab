@@ -4,6 +4,23 @@
   vars_files:
     - group_vars/secrets.yml
 
+  pre_tasks:
+    - name: Create diffie-hellman strong parameters
+      shell: openssl dhparam -out dhparam.pem 4096
+        chdir=/etc/ssl/certs
+        creates=/etc/ssl/certs/dhparam.pem
+      async: 3600
+      poll: 0
+      register: dh_gen
+
+    - name: Diffie Hellman progress
+      async_status:
+        jid: "{{ dh_gen.ansible_job_id }}"
+      register: dh_job_result
+      until: job_result.finished
+      retries: 360
+      delay: 10
+
   roles:
     - gitlab
     - { role: forge_ssl,

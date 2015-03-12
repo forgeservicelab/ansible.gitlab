@@ -35,8 +35,9 @@ server {
 
   # SSL strengthening
   ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
-  ssl_ciphers !DH:EECDH+ECDSA+AESGCM:EECDH+aRSA+AESGCM:EECDH+ECDSA+SHA384:EECDH+ECDSA+SHA256:EECDH+aRSA+SHA384:EECDH+aRSA+SHA256:EECDH+aRSA+RC4:EECDH:EDH+aRSA:!aNULL:!eNULL:!LOW:!3DES:!MD5:!EXP:!PSK:!SRP:!DSS:!RC4;
+  ssl_ciphers ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES256-SHA:DHE-RSA-AES256-SHA;
   ssl_prefer_server_ciphers on;
+  ssl_dhparam /etc/ssl/certs/dhparam.pem;
 
   keepalive_timeout 70;
   ssl_session_cache shared:SSL:10m;
