@@ -22,12 +22,12 @@
       delay: 10
 
   roles:
-    - gitlab
-    - { role: forge_ssl,
-        key_location: "{{ local_ssl_key_path }}",
-        target_key_location: private/,
-        target_cert_location: certs/
-      }
+    - role: gitlab
+    - role: forge_ssl
+      key_location: "{{ local_ssl_key_path }}"
+      target_key_location: private/
+      target_cert_location: certs/
+
   tasks:
     - include: configure.yml
       vars:
