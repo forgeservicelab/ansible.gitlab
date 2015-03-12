@@ -17,7 +17,7 @@
       async_status:
         jid: "{{ dh_gen.ansible_job_id }}"
       register: dh_job_result
-      until: job_result.finished
+      until: dh_job_result.finished
       retries: 360
       delay: 10
 
