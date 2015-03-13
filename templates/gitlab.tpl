@@ -35,7 +35,7 @@ server {
 
   # SSL strengthening
   ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
-  ssl_ciphers ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES256-SHA:DHE-RSA-AES256-SHA;
+  ssl_ciphers ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES256-SHA:DHE-RSA-AES256-SHA:!AES128;
   ssl_prefer_server_ciphers on;
   ssl_dhparam /etc/ssl/certs/dhparam.pem;
 
