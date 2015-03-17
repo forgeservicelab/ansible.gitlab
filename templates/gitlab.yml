@@ -92,9 +92,9 @@ production: &base
 
   ## External issues trackers
   issues_tracker:
-    redmine:
-      title: "Redmine"
-      redmine_api_key: {{ redmine_api_key }}
+    # redmine:
+    #   title: "Redmine"
+    #   redmine_api_key: "apikeyfromadminaccount"
     #   ## If not nil, link 'Issues' on project page will be replaced with this
     #   ## Use placeholders:
     #   ##  :project_id        - GitLab project identifier
