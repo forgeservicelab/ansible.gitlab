@@ -216,9 +216,9 @@ production: &base
       #     args: { access_type: 'offline', approval_prompt: '' } }
       # - { name: 'twitter', app_id: 'YOUR APP ID',
       #     app_secret: 'YOUR APP SECRET'}
-      # - { name: 'github', app_id: 'YOUR APP ID',
-      #     app_secret: 'YOUR APP SECRET',
-      #     args: { scope: 'user:email' } }
+      - { name: 'github', app_id: '{{ github_app_id }}',
+          app_secret: '{{ github_app_secret }}',
+          args: { scope: 'user:email' } }
       - { name: 'cas',
           args: { url: {{ cas_url }}, disable_ssl_verification: false } }
 
