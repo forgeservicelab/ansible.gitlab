@@ -28,6 +28,7 @@ server {
   server_name {{ web_domain }};     # e.g., server_name source.example.com;
   server_tokens off;     # don't show the version number, a security best practice
   add_header Strict-Transport-Security "max-age=31536000";
+  add_header Public-Key-Pins 'pin-sha256="Fq3YMR2ibLgpoD509egJDn5cPXPfnXC5MUd2IWwV/qA="; pin-sha256="lqMfOTYct9rMx/Y2LpHI8aZt9xgWHX/TwLLQ51NQl04="; max-age=2592000';
 
   ssl on;
   ssl_certificate {{ ssl_cert_location }};
