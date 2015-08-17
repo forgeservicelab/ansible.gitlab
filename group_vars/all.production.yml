@@ -1,0 +1,24 @@
+---
+web_domain: git.forgeservicelab.fi
+gitlab_source: ssh://gitlab@git.forgeservicelab.fi:10022/forge/gitlab-ce.git
+gitlab_version: HEAD
+ssl_cert_location: /etc/ssl/forgeservicelab.fi.crt.wholechain
+ssl_key_location: /etc/ssl/forgeservicelab.fi.key
+# Path of the directory containing the SSL key file on the control machine.
+# Can be left blank if it is located on roles/forge_ssl/files.
+local_ssl_key_path:
+
+git_user_name: gitlab
+git_user_home: /data/apps/{{ git_user_name }}
+volume_device: /dev/vdb1
+ssh_port: 10022
+gitlab_shell_version: v2.6.0
+ruby_version: 2.1.5
+
+gitlab_db_user: gitlab
+gitlab_db_host: dbserver.forgeservicelab.fi
+gitlab_db: gitlab_production
+
+google_analytics_id_gitlab: <YOUR UA ANALYTICS ID>
+piwik_url_gitlab: analytics.forgeservicelab.fi/piwik
+piwik_site_id_gitlab: <YOUR PIWIK SITE ID>
